@@ -1,4 +1,5 @@
 import pygame
+import pygame._view
 import sys
 from Orbital.Enemies import Hostage
 
