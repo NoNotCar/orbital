@@ -1,7 +1,7 @@
 '''
 Created on 8 Jul 2015
 
-@author: Thomas
+@author: NoNotCar
 '''
 import math
 import random
