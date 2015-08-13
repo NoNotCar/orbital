@@ -35,7 +35,7 @@ class pygame2exe(py2exe.build_exe.py2exe): #This hack make sure that pygame defa
 class BuildExe:
     def __init__(self):
         #Name of starting .py
-        self.script = "__init__.py"
+        self.script = "orbital.py"
  
         #Name of program
         self.project_name = "orbital"
@@ -47,7 +47,7 @@ class BuildExe:
         self.project_version = "0.6"
  
         #License of the program
-        self.license = "NNC OPEN SOURCE"
+        self.license = ""
  
         #Auhor of program
         self.author_name = "NoNotCar"
