@@ -4,7 +4,7 @@ Created on 13 Aug 2015
 @author: NoNotCar
 '''
 import pygame
-import pygame._view
+#import pygame._view
 import sys
 screen=pygame.display.set_mode((400,256))
 
