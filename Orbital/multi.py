@@ -6,6 +6,7 @@ Created on 13 Aug 2015
 import pygame
 # import pygame._view
 import sys
+import UniJoy
 
 screen = pygame.display.set_mode((400, 256))
 
@@ -60,9 +61,12 @@ levels = (([Asteroid], 15, 1), ([Asteroid, BigAsteroid], 20, 1.5), ([Hostage, As
           ([Asteroid, Obstacle], 30, 1), ([Obstacle2], 30, 1), ([EnemyShip], 30, 1), ([Ranged], 30, 1),
           ([Obstacle, MustShoot], 30, 1.5), ([EnemyShip2], 60, 2))
 level = 0
+jnum = pygame.joystick.get_count()
+unijs = [UniJoy.Unijoy(n) for n in range(jnum)]
+assert jnum>0,"NOT ENOUGH CONTROLLERS"
 Instruct("UP/DOWN TO MOVE", 500)
 pygame.time.wait(500)
-Instruct("SHOOT WITH SPACE", 500)
+Instruct("SHOOT WITH A", 500)
 while True:
     p = Player()
     c = pygame.time.Clock()
@@ -89,14 +93,18 @@ while True:
         screen.fill((255, 255, 255) if level != len(levels) - 1 else (255, 150, 0))
         for obsc in levels[level][0]:
             obsc.generate(obstacles)
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_DOWN]:
+        ujdir = 0
+        for uj in unijs:
+            ujd = uj.getdirstick(1)
+            if ujd:
+                ujdir -= ujd[1]
+        if ujdir < -(jnum // 2):
             if p.radius > 30:
                 p.radius -= 1
-        elif keys[pygame.K_UP]:
+        elif ujdir > jnum // 2:
             if p.radius < 100:
                 p.radius += 1
-        if keys[pygame.K_SPACE] and not p.lasedown:
+        if any([uj.get_b("A") for uj in unijs]) and not p.lasedown:
             plasers.append([p.get_x() - 8, p.get_y() - 2])
             p.lasedown = 20
         if p.lasedown > 0:

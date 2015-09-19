@@ -80,7 +80,7 @@ while True:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 sys.exit()
-        screen.fill((255,255,255) if level!=len(levels)-1 else (255,150,0))
+        screen.fill((240,240,240) if level!=len(levels)-1 else (255,150,0))
         for obsc in levels[level][0]:
             obsc.generate(obstacles)
         keys=pygame.key.get_pressed()
